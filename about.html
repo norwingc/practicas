@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Practica</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Practica</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section>
+            <div class="form-group">
+                <label>Numero 1</label>
+                <input type="number" id="numero_1"/>
+            </div>
+            <div class="form-group">
+                <label>Numero 2</label>
+                <input type="number" id="numero_2"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" onclick="sumar()">Sumar</button>
+            </div>
+    
+            <p>Resultado: <span id="resultado"></span></p>
+        </section>
+        <section>
+            <div id="pokemones" class="row pokemones">
+                
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+
+        <script>
+
+            $(document).ready( function(){
+                var id = 0
+                var url = `https://pokeapi.co/api/v2/pokemon`
+                var pokemones = null
+                var html = ""
+
+                fetch(url).then(response => response.json()).then(data => {
+                    pokemones = data.results
+                    var imagen = null
+
+                    pokemones.map(value => {
+                        // fetch(value.url).then(response => response.json()).then(data => {
+                        //     imagen = data.sprites
+
+                          
+                        // })
+                        html += `<div class="col-md-3">
+                                    <h4>${value.name}</h4>
+                                     <a href='${value.url}' target='new'>${value.url}</a>
+                                </div>`
+                    })   
+                    
+                    $("#pokemones").html(html)
+                })
+            })
+
+            async function start(){
+               
+
+            }
+
+            function sumar(){
+                var numero_1 = Number($("#numero_1").val())
+                var numero_2 = Number($("#numero_2").val())
+
+                var resultado = numero_1 + numero_2
+
+                if(numero_1 <= 1){
+                    resultado = 'El numero es menor'
+                    $("#resultado").html(resultado)
+                    return false
+                }
+
+                $("#resultado").html(resultado)
+            }
+        </script>
+
+</body>
+
+</html>
